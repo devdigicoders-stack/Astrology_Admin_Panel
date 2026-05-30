@@ -209,6 +209,12 @@ const AdminDashboard = () => {
             bgColor="bg-rose-600"
           />
           <StatCard
+            title="Horoscope Earnings"
+            value={`₹${services.horoscopeRevenue || 0}`}
+            icon={DollarSign}
+            bgColor="bg-orange-500"
+          />
+          <StatCard
             title="Total Users"
             value={users.total}
             icon={Users}

@@ -34,7 +34,7 @@ const routes = [
   { path: "/notifications", component: Notifications, name: "Notifications", icon: FaBell, permission: "view_notifications" },
   { path: "/complaints", component: Complaints, name: "Complaints", icon: FaHeadset, permission: "view_complaints" },
   { path: "/carts", component: CartHistory, name: "Pending Carts", icon: FaShoppingCart, permission: "view_carts" },
-  { path: "/settings", component: Settings, name: "App Settings", icon: FaCog, role: "superadmin" },
+  { path: "/settings", component: Settings, name: "App Settings", icon: FaCog },
   { path: "/profile", component: AdminProfile, name: "My Profile", icon: FaUserCircle },
 ];
 

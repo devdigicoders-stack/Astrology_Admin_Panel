@@ -9,7 +9,7 @@ const AdminProfile = () => {
 
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
-  
+
   // Edit Profile State
   const [isEditingProfile, setIsEditingProfile] = useState(false);
   const [profileData, setProfileData] = useState({
@@ -75,7 +75,7 @@ const AdminProfile = () => {
     const { name, value } = e.target;
     setPasswords(prev => ({ ...prev, [name]: value }));
 
-    // Calculate password strength for new password
+    // Calculate password strength
     if (name === 'newPassword') {
       let strength = 0;
       if (value.length >= 6) strength += 1;
@@ -114,6 +114,8 @@ const AdminProfile = () => {
       setIsSubmitting(false);
     }
   };
+
+
 
   const getStrengthColor = () => {
     if (passwordStrength === 0) return 'bg-gray-200';
@@ -154,26 +156,30 @@ const AdminProfile = () => {
   }
 
   return (
-    <div className="p-4 sm:p-6 md:p-8 max-w-6xl mx-auto">
+    <div className="p-4 sm:p-6 md:p-8 max-w-7xl mx-auto transition-colors duration-300" style={{ color: themeColors.text }}>
+      
       {/* Page Header */}
-      <div className="mb-8">
-        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight" style={{ color: themeColors.primary }}>
+      <div className="mb-8 border-b pb-6" style={{ borderColor: themeColors.border }}>
+        <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight" style={{ color: themeColors.primary }}>
           My Profile
         </h1>
-        <p className="text-gray-500 mt-1 text-sm">Manage your account settings and security preferences</p>
+        <p className="mt-1 text-sm opacity-75" style={{ color: themeColors.textSecondary }}>
+          Manage your account settings and security preferences.
+        </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
         {/* Profile Card - Left Column */}
         <div className="lg:col-span-1">
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden sticky top-6">
-            {/* Profile Header with Gradient Accent */}
-            <div className="h-24 bg-gradient-to-r from-indigo-50 via-purple-50 to-pink-50 relative">
+          <div className="rounded-2xl border shadow-sm overflow-hidden sticky top-6 transition-all duration-200 hover:shadow-md" style={{ backgroundColor: themeColors.surface, borderColor: themeColors.border }}>
+            
+            {/* Top decorative banner with theme primary color */}
+            <div className="h-28 relative transition-all duration-300" style={{ background: `linear-gradient(135deg, ${themeColors.primary} 0%, ${themeColors.primary}dd 100%)` }}>
               {!isEditingProfile && (
                 <button 
                   onClick={() => setIsEditingProfile(true)}
-                  className="absolute top-4 right-4 bg-white/50 hover:bg-white text-indigo-600 p-2 rounded-full backdrop-blur-sm shadow-sm transition-all"
+                  className="absolute top-4 right-4 bg-white/10 hover:bg-white/20 text-white p-2 rounded-full backdrop-blur-md shadow-sm transition-all border border-white/20"
                   title="Edit Profile"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
@@ -183,33 +189,43 @@ const AdminProfile = () => {
             
             {isEditingProfile ? (
               <form onSubmit={submitProfileUpdate} className="px-6 pb-6 -mt-12 relative z-10">
-                <div className="w-24 h-24 bg-white rounded-full mx-auto flex items-center justify-center border-4 border-white shadow-md mb-6 relative">
-                  <div className="w-20 h-20 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-full flex items-center justify-center">
-                    <User size={36} className="text-indigo-600" />
+                <div className="w-24 h-24 rounded-full mx-auto flex items-center justify-center border-4 shadow-md mb-6 relative" style={{ backgroundColor: themeColors.surface, borderColor: themeColors.surface }}>
+                  <div className="w-20 h-20 rounded-full flex items-center justify-center" style={{ backgroundColor: `${themeColors.primary}12` }}>
+                    <User size={36} style={{ color: themeColors.primary }} />
                   </div>
                 </div>
                 
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-xs font-medium text-gray-700 mb-1">Full Name</label>
+                    <label className="block text-xs font-semibold uppercase tracking-wider mb-1" style={{ color: themeColors.textSecondary }}>Full Name</label>
                     <input
                       type="text"
                       name="name"
                       required
                       value={profileData.name}
                       onChange={handleProfileChange}
-                      className="w-full border border-gray-200 rounded-lg py-2 px-3 text-sm focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all"
+                      className="w-full border rounded-lg py-2 px-3 text-sm outline-none focus:ring-2 transition-all"
+                      style={{ 
+                        borderColor: themeColors.border, 
+                        backgroundColor: themeColors.background,
+                        color: themeColors.text
+                      }}
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-gray-700 mb-1">Email Address</label>
+                    <label className="block text-xs font-semibold uppercase tracking-wider mb-1" style={{ color: themeColors.textSecondary }}>Email Address</label>
                     <input
                       type="email"
                       name="email"
                       required
                       value={profileData.email}
                       onChange={handleProfileChange}
-                      className="w-full border border-gray-200 rounded-lg py-2 px-3 text-sm focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all"
+                      className="w-full border rounded-lg py-2 px-3 text-sm outline-none focus:ring-2 transition-all"
+                      style={{ 
+                        borderColor: themeColors.border, 
+                        backgroundColor: themeColors.background,
+                        color: themeColors.text
+                      }}
                     />
                   </div>
                 </div>
@@ -221,7 +237,8 @@ const AdminProfile = () => {
                       setIsEditingProfile(false);
                       setProfileData({ name: profile.name, email: profile.email });
                     }}
-                    className="flex-1 py-2 border border-gray-200 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors"
+                    className="flex-1 py-2 border rounded-lg text-sm font-medium transition-colors"
+                    style={{ borderColor: themeColors.border, color: themeColors.text }}
                   >
                     Cancel
                   </button>
@@ -242,37 +259,42 @@ const AdminProfile = () => {
             ) : (
               <>
                 <div className="px-6 pb-6 text-center -mt-12 relative z-10">
-                  <div className="w-24 h-24 bg-white rounded-full mx-auto flex items-center justify-center border-4 border-white shadow-md mb-3">
-                    <div className="w-20 h-20 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-full flex items-center justify-center">
-                      <User size={36} className="text-indigo-600" />
+                  <div className="w-24 h-24 rounded-full mx-auto flex items-center justify-center border-4 shadow-md mb-3" style={{ backgroundColor: themeColors.surface, borderColor: themeColors.surface }}>
+                    <div className="w-20 h-20 rounded-full flex items-center justify-center" style={{ backgroundColor: `${themeColors.primary}12` }}>
+                      <User size={36} style={{ color: themeColors.primary }} />
                     </div>
                   </div>
-                  <h2 className="text-xl font-bold text-gray-900">{profile.name}</h2>
-                  <div className="mt-2 inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-indigo-50 text-indigo-700 border border-indigo-100">
+                  <h2 className="text-xl font-bold">{profile.name}</h2>
+                  <div className="mt-2 inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold border" 
+                       style={{ 
+                         backgroundColor: `${themeColors.primary}0a`, 
+                         color: themeColors.primary, 
+                         borderColor: `${themeColors.primary}20` 
+                       }}>
                     <Shield size={12} className="mr-1.5" />
                     {profile.role === 'superadmin' ? 'Super Administrator' : profile.role || 'Administrator'}
                   </div>
                 </div>
 
                 {/* Account Details */}
-                <div className="border-t border-gray-100 px-6 py-5 bg-gray-50/30">
-                  <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4">Account Information</h3>
+                <div className="border-t px-6 py-5" style={{ borderColor: themeColors.border, backgroundColor: `${themeColors.background}30` }}>
+                  <h3 className="text-xs font-semibold uppercase tracking-wider mb-4" style={{ color: themeColors.textSecondary }}>Account Information</h3>
                   <div className="space-y-4">
                     <div className="flex items-start">
-                      <Mail size={18} className="text-gray-400 mr-3 mt-0.5 flex-shrink-0" />
+                      <Mail size={18} className="mr-3 mt-0.5 flex-shrink-0" style={{ color: themeColors.textSecondary }} />
                       <div>
-                        <p className="text-xs text-gray-400 font-medium uppercase tracking-wider">Email Address</p>
-                        <p className="font-medium text-gray-800 break-all">{profile.email}</p>
+                        <p className="text-[10px] font-semibold uppercase tracking-wider" style={{ color: themeColors.textSecondary }}>Email Address</p>
+                        <p className="font-semibold break-all text-sm">{profile.email}</p>
                       </div>
                     </div>
 
                     <div className="flex items-start">
-                      <Shield size={18} className="text-gray-400 mr-3 mt-0.5 flex-shrink-0" />
+                      <Shield size={18} className="mr-3 mt-0.5 flex-shrink-0" style={{ color: themeColors.textSecondary }} />
                       <div>
-                        <p className="text-xs text-gray-400 font-medium uppercase tracking-wider">Permissions</p>
-                        <p className="text-sm text-gray-600">
+                        <p className="text-[10px] font-semibold uppercase tracking-wider" style={{ color: themeColors.textSecondary }}>Permissions</p>
+                        <p className="text-sm opacity-90">
                           {profile.role === 'superadmin'
-                            ? 'Full system access'
+                            ? 'Full system access (Bypasses restriction)'
                             : (profile.permissions?.length
                               ? profile.permissions.slice(0, 3).join(', ') + (profile.permissions.length > 3 ? '...' : '')
                               : 'Standard access')}
@@ -281,12 +303,11 @@ const AdminProfile = () => {
                     </div>
 
                     <div className="flex items-start">
-                      <div className="w-4 mr-3 flex-shrink-0"></div>
+                      <CheckCircle size={18} className="text-green-500 mr-3 mt-0.5 flex-shrink-0" />
                       <div>
-                        <p className="text-xs text-gray-400 font-medium uppercase tracking-wider">Status</p>
-                        <p className="inline-flex items-center text-green-600 text-sm font-medium">
-                          <CheckCircle size={14} className="mr-1" />
-                          Active
+                        <p className="text-[10px] font-semibold uppercase tracking-wider" style={{ color: themeColors.textSecondary }}>Status</p>
+                        <p className="inline-flex items-center text-green-500 text-sm font-semibold">
+                          Active & Validated
                         </p>
                       </div>
                     </div>
@@ -297,17 +318,17 @@ const AdminProfile = () => {
           </div>
         </div>
 
-        {/* Password Change Form - Right Column */}
+        {/* Security Settings - Right Column */}
         <div className="lg:col-span-2">
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm">
-            <div className="px-6 py-5 border-b border-gray-100">
+          <div className="rounded-2xl border shadow-sm transition-all" style={{ backgroundColor: themeColors.surface, borderColor: themeColors.border }}>
+            <div className="px-6 py-5 border-b" style={{ borderColor: themeColors.border }}>
               <div className="flex items-center">
-                <div className="w-8 h-8 rounded-lg bg-indigo-50 flex items-center justify-center mr-3">
-                  <Key size={18} className="text-indigo-600" />
+                <div className="w-8 h-8 rounded-lg flex items-center justify-center mr-3" style={{ backgroundColor: `${themeColors.primary}12` }}>
+                  <Lock size={18} style={{ color: themeColors.primary }} />
                 </div>
                 <div>
-                  <h2 className="text-lg font-semibold text-gray-900">Security Settings</h2>
-                  <p className="text-sm text-gray-500">Update your password to keep your account secure</p>
+                  <h2 className="text-lg font-bold">Security Settings</h2>
+                  <p className="text-sm opacity-75" style={{ color: themeColors.textSecondary }}>Update your password to keep your administrator session secure</p>
                 </div>
               </div>
             </div>
@@ -317,12 +338,12 @@ const AdminProfile = () => {
 
                 {/* Current Password */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium mb-2">
                     Current Password
                   </label>
                   <div className="relative group">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <Lock size={18} className="text-gray-400 group-focus-within:text-indigo-500 transition-colors" />
+                      <Lock size={18} className="opacity-60" />
                     </div>
                     <input
                       type="password"
@@ -330,7 +351,12 @@ const AdminProfile = () => {
                       required
                       value={passwords.oldPassword}
                       onChange={handlePasswordChange}
-                      className="pl-10 w-full border border-gray-200 rounded-xl py-2.5 px-4 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all duration-200"
+                      className="pl-10 w-full border rounded-xl py-2.5 px-4 outline-none focus:ring-2 transition-all duration-200"
+                      style={{ 
+                        borderColor: themeColors.border, 
+                        backgroundColor: themeColors.background,
+                        color: themeColors.text
+                      }}
                       placeholder="Enter your current password"
                     />
                   </div>
@@ -338,12 +364,12 @@ const AdminProfile = () => {
 
                 {/* New Password */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium mb-2">
                     New Password
                   </label>
                   <div className="relative group">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <Lock size={18} className="text-gray-400 group-focus-within:text-indigo-500 transition-colors" />
+                      <Lock size={18} className="opacity-60" />
                     </div>
                     <input
                       type="password"
@@ -351,22 +377,27 @@ const AdminProfile = () => {
                       required
                       value={passwords.newPassword}
                       onChange={handlePasswordChange}
-                      className="pl-10 w-full border border-gray-200 rounded-xl py-2.5 px-4 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all duration-200"
+                      className="pl-10 w-full border rounded-xl py-2.5 px-4 outline-none focus:ring-2 transition-all duration-200"
+                      style={{ 
+                        borderColor: themeColors.border, 
+                        backgroundColor: themeColors.background,
+                        color: themeColors.text
+                      }}
                       placeholder="Minimum 6 characters"
                     />
                   </div>
 
                   {/* Password Strength Indicator */}
                   {passwords.newPassword && (
-                    <div className="mt-2">
+                    <div className="mt-3 bg-gray-50/50 p-2.5 rounded-lg border" style={{ borderColor: themeColors.border }}>
                       <div className="flex items-center gap-2">
-                        <div className="flex-1 h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                        <div className="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
                           <div
                             className={`h-full transition-all duration-300 ${getStrengthColor()}`}
                             style={{ width: `${(passwordStrength / 4) * 100}%` }}
                           ></div>
                         </div>
-                        <span className={`text-xs font-medium ${passwordStrength === 1 ? 'text-red-500' :
+                        <span className={`text-xs font-bold ${passwordStrength === 1 ? 'text-red-500' :
                             passwordStrength === 2 ? 'text-orange-500' :
                               passwordStrength === 3 ? 'text-yellow-600' :
                                 passwordStrength === 4 ? 'text-green-500' : 'text-gray-400'
@@ -374,8 +405,8 @@ const AdminProfile = () => {
                           {getStrengthText()}
                         </span>
                       </div>
-                      <p className="text-xs text-gray-400 mt-1">
-                        Use 6+ chars with letters, numbers & symbols
+                      <p className="text-[10px] opacity-70 mt-1.5">
+                        Tip: Use uppercase letters, numbers, and symbols (!@#$) for maximum security.
                       </p>
                     </div>
                   )}
@@ -383,12 +414,12 @@ const AdminProfile = () => {
 
                 {/* Confirm Password */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium mb-2">
                     Confirm New Password
                   </label>
                   <div className="relative group">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <Lock size={18} className="text-gray-400 group-focus-within:text-indigo-500 transition-colors" />
+                      <Lock size={18} className="opacity-60" />
                     </div>
                     <input
                       type="password"
@@ -396,13 +427,18 @@ const AdminProfile = () => {
                       required
                       value={passwords.confirmPassword}
                       onChange={handlePasswordChange}
-                      className="pl-10 w-full border border-gray-200 rounded-xl py-2.5 px-4 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all duration-200"
+                      className="pl-10 w-full border rounded-xl py-2.5 px-4 outline-none focus:ring-2 transition-all duration-200"
+                      style={{ 
+                        borderColor: themeColors.border, 
+                        backgroundColor: themeColors.background,
+                        color: themeColors.text
+                      }}
                       placeholder="Confirm your new password"
                     />
                   </div>
                   {passwords.confirmPassword && passwords.newPassword !== passwords.confirmPassword && (
-                    <p className="mt-1 text-xs text-red-500 flex items-center">
-                      <AlertCircle size={12} className="mr-1" />
+                    <p className="mt-1.5 text-xs text-red-500 flex items-center font-semibold">
+                      <AlertCircle size={12} className="mr-1.5" />
                       Passwords do not match
                     </p>
                   )}
@@ -413,7 +449,7 @@ const AdminProfile = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting || !passwords.oldPassword || !passwords.newPassword || !passwords.confirmPassword || passwords.newPassword !== passwords.confirmPassword}
-                    className="flex items-center justify-center px-6 py-2.5 text-white font-medium rounded-xl transition-all duration-200 shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-sm"
+                    className="flex items-center justify-center px-6 py-2.5 text-white font-bold rounded-xl transition-all duration-200 shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-sm"
                     style={{ backgroundColor: themeColors.primary }}
                   >
                     {isSubmitting ? (
@@ -432,7 +468,8 @@ const AdminProfile = () => {
                   <button
                     type="button"
                     onClick={() => setPasswords({ oldPassword: '', newPassword: '', confirmPassword: '' })}
-                    className="px-6 py-2.5 text-gray-600 font-medium rounded-xl border border-gray-200 hover:bg-gray-50 transition-colors duration-200"
+                    className="px-6 py-2.5 font-bold rounded-xl border hover:bg-gray-50/50 transition-colors duration-200"
+                    style={{ borderColor: themeColors.border, color: themeColors.text }}
                   >
                     Cancel
                   </button>
@@ -455,6 +492,7 @@ const AdminProfile = () => {
             </div>
           </div>
         </div>
+
       </div>
     </div>
   );

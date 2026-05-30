@@ -6,6 +6,8 @@ import { useAuth } from "../context/AuthContext";
 const Settings = () => {
   const [kundaliRate, setKundaliRate] = useState("");
   const [aiChatRate, setAiChatRate] = useState("");
+  const [dailyHoroscopeRate, setDailyHoroscopeRate] = useState("");
+  const [weeklyHoroscopeRate, setWeeklyHoroscopeRate] = useState("");
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   
@@ -28,6 +30,12 @@ const Settings = () => {
         if(data.settings.aiChatRate !== undefined) {
           setAiChatRate(data.settings.aiChatRate);
         }
+        if(data.settings.dailyHoroscopeRate !== undefined) {
+          setDailyHoroscopeRate(data.settings.dailyHoroscopeRate);
+        }
+        if(data.settings.weeklyHoroscopeRate !== undefined) {
+          setWeeklyHoroscopeRate(data.settings.weeklyHoroscopeRate);
+        }
       }
     } catch (error) {
       toast.error(error || "Failed to load settings");
@@ -47,7 +55,9 @@ const Settings = () => {
       setSaving(true);
       const data = await updateSettings({
         kundaliRate: Number(kundaliRate),
-        aiChatRate: Number(aiChatRate)
+        aiChatRate: Number(aiChatRate),
+        dailyHoroscopeRate: Number(dailyHoroscopeRate),
+        weeklyHoroscopeRate: Number(weeklyHoroscopeRate)
       });
       
       if (data.success) {
@@ -55,6 +65,12 @@ const Settings = () => {
         setKundaliRate(data.settings.kundaliRate);
         if(data.settings.aiChatRate !== undefined) {
           setAiChatRate(data.settings.aiChatRate);
+        }
+        if(data.settings.dailyHoroscopeRate !== undefined) {
+          setDailyHoroscopeRate(data.settings.dailyHoroscopeRate);
+        }
+        if(data.settings.weeklyHoroscopeRate !== undefined) {
+          setWeeklyHoroscopeRate(data.settings.weeklyHoroscopeRate);
         }
       }
     } catch (error) {
@@ -139,6 +155,60 @@ const Settings = () => {
               </div>
               <p className="mt-2 text-xs text-gray-500">
                 This amount will be deducted from user's wallet per message after their free limit is over.
+              </p>
+            </div>
+
+            {/* Daily Horoscope Rate Input */}
+            <div className="col-span-1">
+              <label htmlFor="dailyHoroscopeRate" className="block text-sm font-medium text-gray-700 mb-2">
+                Daily Horoscope Rate (₹)
+              </label>
+              <div className="relative rounded-md shadow-sm">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <span className="text-gray-500 sm:text-sm">₹</span>
+                </div>
+                <input
+                  type="number"
+                  name="dailyHoroscopeRate"
+                  id="dailyHoroscopeRate"
+                  min="0"
+                  required
+                  value={dailyHoroscopeRate}
+                  onChange={(e) => setDailyHoroscopeRate(e.target.value)}
+                  disabled={!isSuperAdmin || saving}
+                  className="focus:ring-blue-500 focus:border-blue-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md py-3 bg-gray-50"
+                  placeholder="0.00"
+                />
+              </div>
+              <p className="mt-2 text-xs text-gray-500">
+                This amount will be deducted from user's wallet every time they check their Daily Horoscope.
+              </p>
+            </div>
+
+            {/* Weekly Horoscope Rate Input */}
+            <div className="col-span-1">
+              <label htmlFor="weeklyHoroscopeRate" className="block text-sm font-medium text-gray-700 mb-2">
+                Weekly Horoscope Rate (₹)
+              </label>
+              <div className="relative rounded-md shadow-sm">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <span className="text-gray-500 sm:text-sm">₹</span>
+                </div>
+                <input
+                  type="number"
+                  name="weeklyHoroscopeRate"
+                  id="weeklyHoroscopeRate"
+                  min="0"
+                  required
+                  value={weeklyHoroscopeRate}
+                  onChange={(e) => setWeeklyHoroscopeRate(e.target.value)}
+                  disabled={!isSuperAdmin || saving}
+                  className="focus:ring-blue-500 focus:border-blue-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md py-3 bg-gray-50"
+                  placeholder="0.00"
+                />
+              </div>
+              <p className="mt-2 text-xs text-gray-500">
+                This amount will be deducted from user's wallet every time they check their Weekly Horoscope.
               </p>
             </div>
             
