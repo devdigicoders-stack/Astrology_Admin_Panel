@@ -20,7 +20,7 @@ const AdminDashboard = () => {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem('admin-token');
-        const response = await fetch('http://localhost:5000/api/dashboard/admin', {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/dashboard/admin`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         const result = await response.json();
