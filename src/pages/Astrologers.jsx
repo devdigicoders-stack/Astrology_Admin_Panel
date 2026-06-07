@@ -383,7 +383,7 @@ export default function Astrologers() {
                     <td className="px-6 py-4">
                       <div className="w-10 h-10 rounded-full bg-gray-200 overflow-hidden flex-shrink-0 flex items-center justify-center border">
                         {astrologer.profilePic ? (
-                          <img src={`http://localhost:5000/uploads/${astrologer.profilePic}`} alt="Profile" className="w-full h-full object-cover" />
+                          <img src={`${import.meta.env.VITE_API_BASE_URL}/uploads/${astrologer.profilePic}`} alt="Profile" className="w-full h-full object-cover" />
                         ) : (
                           <ImageIcon size={18} className="text-gray-400" />
                         )}
@@ -659,7 +659,7 @@ export default function Astrologers() {
                 <div className="w-24 h-24 rounded-full bg-white p-1 shadow-md">
                   <div className="w-full h-full rounded-full bg-gray-200 overflow-hidden flex items-center justify-center">
                     {viewingAstrologer.profilePic ? (
-                      <img src={`http://localhost:5000/uploads/${viewingAstrologer.profilePic}`} alt="Profile" className="w-full h-full object-cover" />
+                      <img src={`${import.meta.env.VITE_API_BASE_URL}/uploads/${viewingAstrologer.profilePic}`} alt="Profile" className="w-full h-full object-cover" />
                     ) : (
                       <ImageIcon size={32} className="text-gray-400" />
                     )}
