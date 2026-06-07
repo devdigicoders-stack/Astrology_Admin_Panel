@@ -412,7 +412,7 @@ const CartHistory = () => {
                     <div key={index} className="flex items-center p-4 border border-gray-100 rounded-xl bg-gray-50/50 hover:bg-gray-50 transition">
                       <div className="h-16 w-16 bg-white rounded-lg border border-gray-200 overflow-hidden flex-shrink-0 mr-4">
                         {item.product?.images && item.product.images.length > 0 ? (
-                          <img src={`http://localhost:5000/uploads/${item.product.images[0]}`} alt={item.product?.name} className="w-full h-full object-cover" onError={(e) => { e.target.src = 'https://via.placeholder.com/150'; }} />
+                          <img src={`${import.meta.env.VITE_API_BASE_URL}/uploads/${item.product.images[0]}`} alt={item.product?.name} className="w-full h-full object-cover" onError={(e) => { e.target.src = 'https://via.placeholder.com/150'; }} />
                         ) : (
                           <div className="w-full h-full flex items-center justify-center bg-gray-100 text-gray-400">
                             <Package size={24} />

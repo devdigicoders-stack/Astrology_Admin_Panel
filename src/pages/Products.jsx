@@ -143,7 +143,7 @@ const Products = () => {
       });
       // Show existing images as previews
       if (product.images && product.images.length > 0) {
-        setImagePreviews(product.images.map(img => `http://localhost:5000/uploads/${img}`));
+        setImagePreviews(product.images.map(img => `${import.meta.env.VITE_API_BASE_URL}/uploads/${img}`));
       } else {
         setImagePreviews([]);
       }
@@ -387,7 +387,7 @@ const Products = () => {
                       <div className="h-10 w-10 rounded-lg bg-gray-100 overflow-hidden border border-gray-200 flex items-center justify-center flex-shrink-0">
                         {product.images && product.images.length > 0 ? (
                           <img 
-                            src={`http://localhost:5000/uploads/${product.images[0]}`} 
+                            src={`${import.meta.env.VITE_API_BASE_URL}/uploads/${product.images[0]}`} 
                             alt={product.name}
                             className="h-full w-full object-cover"
                             onError={(e) => { e.target.src = 'https://via.placeholder.com/150'; }}
@@ -702,7 +702,7 @@ const Products = () => {
                   <div className="aspect-square bg-gray-100 rounded-xl overflow-hidden border border-gray-200 mb-3 shadow-sm">
                     {viewingProduct.images && viewingProduct.images.length > 0 ? (
                       <img 
-                        src={`http://localhost:5000/uploads/${viewingProduct.images[0]}`} 
+                        src={`${import.meta.env.VITE_API_BASE_URL}/uploads/${viewingProduct.images[0]}`} 
                         alt={viewingProduct.name}
                         className="w-full h-full object-cover"
                         onError={(e) => { e.target.src = 'https://via.placeholder.com/300'; }}
@@ -718,7 +718,7 @@ const Products = () => {
                       {viewingProduct.images.slice(1).map((img, idx) => (
                         <div key={idx} className="aspect-square bg-gray-100 rounded-md overflow-hidden border border-gray-200">
                           <img 
-                            src={`http://localhost:5000/uploads/${img}`} 
+                            src={`${import.meta.env.VITE_API_BASE_URL}/uploads/${img}`} 
                             alt={`${viewingProduct.name} ${idx+1}`}
                             className="w-full h-full object-cover"
                             onError={(e) => { e.target.src = 'https://via.placeholder.com/150'; }}

@@ -495,7 +495,7 @@ const Orders = () => {
                       <div key={idx} className="flex gap-3 items-center p-3 bg-white border border-gray-100 rounded-lg shadow-sm">
                         <div className="h-12 w-12 rounded-lg bg-gray-100 overflow-hidden flex-shrink-0">
                           {item.product?.images && item.product.images.length > 0 ? (
-                            <img src={`http://localhost:5000/uploads/${item.product.images[0]}`} alt="Product" className="w-full h-full object-cover" />
+                            <img src={`${import.meta.env.VITE_API_BASE_URL}/uploads/${item.product.images[0]}`} alt="Product" className="w-full h-full object-cover" />
                           ) : (
                             <div className="w-full h-full flex items-center justify-center text-gray-400">
                               <Package size={20} />

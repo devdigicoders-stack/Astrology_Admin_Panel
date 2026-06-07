@@ -264,7 +264,7 @@ export default function Users() {
                     <td className="px-6 py-4 font-medium whitespace-nowrap flex items-center gap-3">
                       <div className="h-9 w-9 rounded-full bg-gray-100 overflow-hidden flex-shrink-0 border border-gray-200 flex items-center justify-center text-gray-500 font-bold">
                         {user.profileImage ? (
-                          <img src={`http://localhost:5000/uploads/${user.profileImage}`} alt={user.name} className="h-full w-full object-cover" onError={(e) => e.target.style.display = 'none'} />
+                          <img src={`${import.meta.env.VITE_API_BASE_URL}/uploads/${user.profileImage}`} alt={user.name} className="h-full w-full object-cover" onError={(e) => e.target.style.display = 'none'} />
                         ) : (
                           user.name ? user.name.charAt(0).toUpperCase() : 'U'
                         )}
@@ -410,7 +410,7 @@ export default function Users() {
               <div className="flex items-center gap-4">
                 <div className="h-16 w-16 rounded-full bg-gray-100 overflow-hidden flex-shrink-0 border-2 border-indigo-50 flex items-center justify-center text-gray-400 font-bold text-2xl shadow-sm">
                   {viewingUserDetails.profileImage ? (
-                    <img src={`http://localhost:5000/uploads/${viewingUserDetails.profileImage}`} alt={viewingUserDetails.name} className="h-full w-full object-cover" onError={(e) => e.target.style.display = 'none'} />
+                    <img src={`${import.meta.env.VITE_API_BASE_URL}/uploads/${viewingUserDetails.profileImage}`} alt={viewingUserDetails.name} className="h-full w-full object-cover" onError={(e) => e.target.style.display = 'none'} />
                   ) : (
                     viewingUserDetails.name ? viewingUserDetails.name.charAt(0).toUpperCase() : 'U'
                   )}

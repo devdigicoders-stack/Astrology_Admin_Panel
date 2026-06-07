@@ -137,7 +137,7 @@ const Pooja = () => {
       });
       // Show existing image as preview
       if (pooja.image) {
-        setImagePreview(`http://localhost:5000/uploads/${pooja.image}`);
+        setImagePreview(`${import.meta.env.VITE_API_BASE_URL}/uploads/${pooja.image}`);
       } else {
         setImagePreview(null);
       }
@@ -371,7 +371,7 @@ const Pooja = () => {
                       <div className="h-10 w-10 rounded-lg bg-gray-100 overflow-hidden border border-gray-200 flex items-center justify-center flex-shrink-0">
                         {pooja.image ? (
                           <img 
-                            src={`http://localhost:5000/uploads/${pooja.image}`} 
+                            src={`${import.meta.env.VITE_API_BASE_URL}/uploads/${pooja.image}`} 
                             alt={pooja.name}
                             className="h-full w-full object-cover"
                             onError={(e) => { e.target.src = 'https://via.placeholder.com/150'; }}
@@ -668,7 +668,7 @@ const Pooja = () => {
                   <div className="aspect-[4/3] bg-gray-100 rounded-xl overflow-hidden border border-gray-200 shadow-sm">
                     {viewingPooja.image ? (
                       <img 
-                        src={`http://localhost:5000/uploads/${viewingPooja.image}`} 
+                        src={`${import.meta.env.VITE_API_BASE_URL}/uploads/${viewingPooja.image}`} 
                         alt={viewingPooja.name}
                         className="w-full h-full object-cover"
                         onError={(e) => { e.target.src = 'https://via.placeholder.com/300'; }}
